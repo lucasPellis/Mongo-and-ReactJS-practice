@@ -1,0 +1,92 @@
+{ 
+    "num" : "001", 
+    "name" : "Bulbasaur"
+}
+{ 
+    "num" : "010", 
+    "name" : "Caterpie"
+}
+{ 
+    "num" : "013", 
+    "name" : "Weedle"
+}
+{ 
+    "num" : "016", 
+    "name" : "Pidgey"
+}
+{ 
+    "num" : "019", 
+    "name" : "Rattata"
+}
+{ 
+    "num" : "021", 
+    "name" : "Spearow"
+}
+{ 
+    "num" : "023", 
+    "name" : "Ekans"
+}
+{ 
+    "num" : "029", 
+    "name" : "Nidoran ♀ (Female)"
+}
+{ 
+    "num" : "032", 
+    "name" : "Nidoran ♂ (Male)"
+}
+{ 
+    "num" : "041", 
+    "name" : "Zubat"
+}
+{ 
+    "num" : "043", 
+    "name" : "Oddish"
+}
+{ 
+    "num" : "046", 
+    "name" : "Paras"
+}
+{ 
+    "num" : "048", 
+    "name" : "Venonat"
+}
+{ 
+    "num" : "054", 
+    "name" : "Psyduck"
+}
+{ 
+    "num" : "060", 
+    "name" : "Poliwag"
+}
+{ 
+    "num" : "069", 
+    "name" : "Bellsprout"
+}
+{ 
+    "num" : "072", 
+    "name" : "Tentacool"
+}
+{ 
+    "num" : "074", 
+    "name" : "Geodude"
+}
+{ 
+    "num" : "084", 
+    "name" : "Doduo"
+}
+{ 
+    "num" : "092", 
+    "name" : "Gastly"
+}
+{ 
+    "num" : "096", 
+    "name" : "Drowzee"
+}
+{ 
+    "num" : "098", 
+    "name" : "Krabby"
+}
+{ 
+    "num" : "118", 
+    "name" : "Goldeen"
+}
