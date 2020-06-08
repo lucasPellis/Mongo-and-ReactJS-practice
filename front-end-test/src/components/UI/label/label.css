@@ -1,0 +1,10 @@
+.label {
+  padding: .2em .6em .3em;
+  margin: .1rem;
+  font-weight: 600;
+  line-height: 1;
+  color: white;
+  text-align: center;
+  border-radius: .25em;
+  background-color: #6BEEA6;
+}

@@ -1,0 +1,26 @@
+.btn {
+  border-radius: 5px;
+  border: none;
+  color: white;
+  padding: .3em .8em .3em;
+  text-align: center;
+  text-decoration: none;
+  margin: 0 .2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-green {
+  background-color: #4caf50;
+}
+.btn-blue {
+  background-color: #008cba;
+}
+.btn-red {
+  background-color: #FF033E;
+}
+.btn-yellow {
+  background-color: #FFCC00;
+}
+
