@@ -34,19 +34,22 @@ class InputWraper extends Component {
     this.setState({ formValue: e.target.value });
   }
 
-  emitName(e) {
-    e.preventDefault();
-    this.props.nameHandler(this.formatText(this.state.formValue));
+  emitName(event, value) {
+    event.preventDefault();
     if (this.props.cleanValueAfterSubmit) this.setState({ formValue: '' });
+    this.props.nameHandler(this.formatText(value));
   }
 
   render() {
     const { placeholder, onCancel, hideCancel } = this.props;
     const { formValue } = this.state;
 
+    console.log(formValue);
+    
+
     return (
       <div className="form-wrapper">
-        <form onSubmit={this.emitName}>
+        <form onSubmit={(e) => this.emitName(e, formValue)}>
           <RoundedTextInput
             placeholder={placeholder}
             value={formValue}

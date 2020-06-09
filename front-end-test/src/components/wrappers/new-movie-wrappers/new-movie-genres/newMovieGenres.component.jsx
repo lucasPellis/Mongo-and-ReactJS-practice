@@ -30,6 +30,7 @@ const NewMovieGenres = (props) => {
           placeholder="Insert a new genre"
           nameHandler={newGenreHandler}
           onCancel={onCancel}
+          cleanValueAfterSubmit
         />
       </div>
 
