@@ -5,7 +5,13 @@
     justify-content: center;
 }
 
-.form-btns{
+.form-btns-two{
     margin-top: 0.5rem;
     justify-content: space-between;
+}
+
+.form-btns-one{
+    display: flex;
+    margin: 0.5rem 0 .5rem;
+    justify-content: center;
 }

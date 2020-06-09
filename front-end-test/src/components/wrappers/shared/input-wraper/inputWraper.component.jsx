@@ -41,7 +41,7 @@ class InputWraper extends Component {
   }
 
   render() {
-    const { placeholder, onCancel } = this.props;
+    const { placeholder, onCancel, hideCancel } = this.props;
     const { formValue } = this.state;
 
     return (
@@ -52,18 +52,20 @@ class InputWraper extends Component {
             value={formValue}
             onChange={(e) => this.onChange(e)}
           />
-          <div className="form-btns">
+          <div className={hideCancel ? 'form-btns-one' : 'form-btns-two'}>
             <RoundedButton
               type="submit"
               text="Save"
               className="btn-big btn-blue"
             />
+            {(!hideCancel) && (
             <RoundedButton
               type="button"
               text="Cancel"
               className="btn-big btn-red"
               onClick={onCancel}
             />
+            )}
           </div>
         </form>
       </div>

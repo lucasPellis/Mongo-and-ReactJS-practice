@@ -1,16 +1,24 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import MovieCard from '../../../UI/movie-card/movieCard.component';
 
-// TODO Sort by watched and createdate
+
+const FilterListByTitle = (movies, title) => {
+  return (!title ? movies : movies.filter((movie) => movie.title.toLowerCase().includes(title.toLowerCase())));
+};
+
+// diff date y si la miro multiplcar por 10000
+// Improve sort algoritm, now is O(n2)
 const sortMoviesByWatchedAndChecked = (movies) => movies;
+// const moviesByDate = movies.sort((a, b) => a.date - b.date);
 
 const MoviesWrapper = (props) => {
   const {
-    movies, deleteClick, editClick, watchedClick,
+    movies, deleteClick, editClick, watchedClick, filterString,
   } = props;
 
-  return movies.length > 0 ? sortMoviesByWatchedAndChecked(movies).map((movie) => (
+  return FilterListByTitle(movies, filterString).length > 0 ? sortMoviesByWatchedAndChecked(FilterListByTitle(movies, filterString)).map((movie) => (
     <MovieCard
       key={movie.id}
       id={movie.id}

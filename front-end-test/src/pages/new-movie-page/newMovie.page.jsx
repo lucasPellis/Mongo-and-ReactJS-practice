@@ -42,6 +42,7 @@ class NewMoviePage extends Component {
       id: new Date().valueOf(),
       title: this.state.movieName,
       genres: this.state.genres,
+      watched: false,
       date: new Date(),
     };
 
