@@ -17,13 +17,15 @@ const FilterListByTitle = (movies, titleText, genre) => {
   };
 
   return movies.filter((movie) => filterByTitle(movie.title) && filterByGenre(movie.genres));
-
-// (!title ? movies : movies.filter((movie) => movie.title.toLowerCase().includes(title.toLowerCase())));
 };
+
 // diff date y si la miro multiplcar por 10000
 // Improve sort algoritm, now is O(n2)
-const sortMoviesByWatchedAndChecked = (movies) => movies;
-// const moviesByDate = movies.sort((a, b) => a.date - b.date);
+const sortMoviesByWatchedAndChecked = (movies) => {
+  const sortedMovies = movies.sort((a) => (a.id) * (a.watched ? -1 : 1));
+  return sortedMovies;
+};
+
 
 const FilteredMoviesListWrapper = (props) => {
   const {

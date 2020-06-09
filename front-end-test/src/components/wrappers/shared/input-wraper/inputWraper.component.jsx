@@ -44,9 +44,6 @@ class InputWraper extends Component {
     const { placeholder, onCancel, hideCancel } = this.props;
     const { formValue } = this.state;
 
-    console.log(formValue);
-    
-
     return (
       <div className="form-wrapper">
         <form onSubmit={(e) => this.emitName(e, formValue)}>
