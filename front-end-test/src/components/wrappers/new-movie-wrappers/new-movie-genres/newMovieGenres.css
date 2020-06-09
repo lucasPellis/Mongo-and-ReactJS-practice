@@ -1,0 +1,19 @@
+.add-genres-wrapper {
+  text-align: center;
+  height: 20rem;
+}
+
+.genre-form-wrapper {
+  margin-top: 2rem;
+}
+
+
+.center-elements{
+  display: flex;
+  justify-content: center;
+}
+
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+}

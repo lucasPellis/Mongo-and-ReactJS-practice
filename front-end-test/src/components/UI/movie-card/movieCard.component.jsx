@@ -2,13 +2,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import './movieCard.css';
-import GenreLabelsWrapper from '../../wrappers/genre-label-wrapper/genreLabelWrapper.component';
 import CheckBox from '../checkBox/checkBox.component';
 import RoundedButton from '../buttons/rounded-button/roundedButton.component';
+import GenreLabelsWrapper from '../../wrappers/shared/genre-label-wrapper/genreLabelWrapper.component';
 
 const MovieCard = (props) => {
-  // Add ID and
-  const { title, genres, watched } = props;
+  const {
+    id, title, genres, watched, deleteClick, editClick, watchedClick,
+  } = props;
 
   return (
     <div className="card-container">
@@ -23,12 +24,12 @@ const MovieCard = (props) => {
 
       <div className="card-footer">
         <div className="buttons-footer-containers">
-          <RoundedButton text="Delete" className="btn-red" />
-          <RoundedButton text="Edit" className="btn-blue" />
+          <RoundedButton type="button" text="Delete" className="btn-normal btn-red" onClick={() => deleteClick(id)} />
+          <RoundedButton type="button" text="Edit" className="btn-normal btn-blue" onClick={() => editClick(id)} />
         </div>
 
         <div className="checkbox-footer-containers">
-          <CheckBox label="Movie viewed" checked={watched} />
+          <CheckBox id={id} label="Movie viewed" checked={watched} checkboxHandler={() => watchedClick(id)} />
         </div>
       </div>
     </div>

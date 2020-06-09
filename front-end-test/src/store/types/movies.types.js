@@ -1,0 +1,4 @@
+const GET_MOVIES = 'GET_MOVIES';
+const ADD_MOVIE = 'ADD_MOVIE';
+
+export { GET_MOVIES, ADD_MOVIE };

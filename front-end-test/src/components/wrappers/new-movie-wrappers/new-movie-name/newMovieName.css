@@ -1,0 +1,15 @@
+.new-name-wrapper {
+  text-align: center;
+}
+
+
+@media screen and (max-width: 480px) {
+  .new-name-wrapper {
+    margin-top: 35%;
+  }
+}
+@media screen and (min-width: 481px) {
+  .new-name-wrapper {
+    margin-top: 5%;
+  }
+}

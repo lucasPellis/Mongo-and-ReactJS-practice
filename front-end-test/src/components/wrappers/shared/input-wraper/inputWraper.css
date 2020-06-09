@@ -1,0 +1,11 @@
+.form-wrapper {
+    width: 90%; 
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.form-btns{
+    margin-top: 0.5rem;
+    justify-content: space-between;
+}
