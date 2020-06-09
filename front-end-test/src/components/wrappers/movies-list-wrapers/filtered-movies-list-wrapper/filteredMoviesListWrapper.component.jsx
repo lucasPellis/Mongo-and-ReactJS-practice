@@ -19,8 +19,7 @@ const FilterListByTitle = (movies, titleText, genre) => {
   return movies.filter((movie) => filterByTitle(movie.title) && filterByGenre(movie.genres));
 };
 
-// diff date y si la miro multiplcar por 10000
-// Improve sort algoritm, now is O(n2)
+
 const sortMoviesByWatchedAndChecked = (movies) => {
   const sortedMovies = movies.sort((a) => (a.id) * (a.watched ? -1 : 1));
   return sortedMovies;

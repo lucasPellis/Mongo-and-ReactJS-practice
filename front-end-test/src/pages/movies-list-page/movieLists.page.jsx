@@ -11,12 +11,10 @@ import {
   editMovieTitle,
 } from "../../store/actions/updateMovie.action";
 import history from "../../utils/history";
-import MoviesWrapper from "../../components/wrappers/movies-list-wrapers/movies-wrapper/moviesWrapper.component";
 import RoundedButton from "../../components/UI/buttons/rounded-button/roundedButton.component";
 import LoadSpinner from "../../components/UI/load-spinner/loadSpinner.component";
 import RoundedTextInput from "../../components/UI/inputs/rounded-text-input/roundedTextInput.component";
 import GenresRadioButtonsAccordion from "../../components/wrappers/movies-list-wrapers/genres-radio-buttons-accordion/genresRadioButtonsAccordion.component";
-import { getAllMovies } from "../../store/actions/filterMovies.actions";
 import FilteredMoviesListWrapper from "../../components/wrappers/movies-list-wrapers/filtered-movies-list-wrapper/filteredMoviesListWrapper.component";
 
 class MoviesList extends Component {
@@ -110,7 +108,6 @@ const MapStateToProps = (state) => ({
 });
 
 const MapDispatchToProps = (dispatch) => ({
-  getAllMovies: () => dispatch(getAllMovies()),
   movieWatched: (movieID) => dispatch(movieWatched(movieID)),
   deleteMovie: (movieID) => dispatch(deleteMovie(movieID)),
   editMovieTitle: (movieID, newTitle) =>
