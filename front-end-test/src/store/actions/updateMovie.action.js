@@ -4,9 +4,11 @@ import {
 import LOADING from '../types/loading.types';
 import history from '../../utils/history';
 
-const delayLoadingTime = 1000;
+// API service
+import {
+  saveMovieAPI, deleteMovieAPI, movieWatchedAPI, editMovieTitleAPI,
+} from '../../services/movies.service';
 
-// Add promises and services para simular async
 
 const dispatchLoadingChanges = (isLoading) => ({ type: LOADING, payload: isLoading });
 const dispatchNewMovie = (movie) => ({ type: ADD_MOVIE, payload: movie });
@@ -16,35 +18,39 @@ const dispatchEditMovieName = (payload) => ({ type: EDIT_MOVIE_NAME, payload });
 
 const saveMovie = (movie) => (dispatch) => {
   dispatch(dispatchLoadingChanges(true));
-  setTimeout(() => {
-    dispatch(dispatchNewMovie(movie));
-    dispatch(dispatchLoadingChanges(false));
-    history.push('/');
-  }, delayLoadingTime);
+  saveMovieAPI(movie)
+    .then((movieAPI) => {
+      dispatch(dispatchNewMovie(movieAPI));
+      dispatch(dispatchLoadingChanges(false));
+      history.push('/');
+    });
 };
 
 const deleteMovie = (movieID) => (dispatch) => {
   dispatch(dispatchLoadingChanges(true));
-  setTimeout(() => {
-    dispatch(dispatchDeleteMovie(movieID));
-    dispatch(dispatchLoadingChanges(false));
-  }, delayLoadingTime);
+  deleteMovieAPI(movieID)
+    .then((movieIDAPI) => {
+      dispatch(dispatchDeleteMovie(movieIDAPI));
+      dispatch(dispatchLoadingChanges(false));
+    });
 };
 
 const movieWatched = (movieID) => (dispatch) => {
   dispatch(dispatchLoadingChanges(true));
-  setTimeout(() => {
-    dispatch(dispatchMovieMovie(movieID));
-    dispatch(dispatchLoadingChanges(false));
-  }, delayLoadingTime);
+  movieWatchedAPI(movieID)
+    .then((movieIDAPI) => {
+      dispatch(dispatchMovieMovie(movieIDAPI));
+      dispatch(dispatchLoadingChanges(false));
+    });
 };
 
 const editMovieTitle = (movieID, newTitle) => (dispatch) => {
   dispatch(dispatchLoadingChanges(true));
-  setTimeout(() => {
-    dispatch(dispatchEditMovieName({ id: movieID, title: newTitle }));
-    dispatch(dispatchLoadingChanges(false));
-  }, delayLoadingTime);
+  editMovieTitleAPI(movieID, newTitle)
+    .then((data) => {
+      dispatch(dispatchEditMovieName({ id: data.movieID, title: data.newTitle }));
+      dispatch(dispatchLoadingChanges(false));
+    });
 };
 
 
