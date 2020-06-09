@@ -6,11 +6,13 @@ import thunk from 'redux-thunk';
 
 import loadingReducer from './reducers/loading.reducer';
 import moviesReducer from './reducers/movies.reducer';
+import filteredReducer from './reducers/filtered.reducer';
 
 const middleware = [thunk];
-const allReducers = combineReducers({ movies: moviesReducer, isLoading: loadingReducer });
+const allReducers = combineReducers({ allMovies: moviesReducer, filteredMovies: filteredReducer, isLoading: loadingReducer });
 const initialState = {
-  movies: [],
+  allMovies: [],
+  filteredMovies: [],
   isLoading: false,
 };
 const store = createStore(allReducers, initialState, compose(applyMiddleware(...middleware),

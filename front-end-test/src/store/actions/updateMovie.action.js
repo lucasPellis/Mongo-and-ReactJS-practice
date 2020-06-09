@@ -4,7 +4,7 @@ import {
 import LOADING from '../types/loading.types';
 import history from '../../utils/history';
 
-// API service
+// API service.
 import {
   saveMovieAPI, deleteMovieAPI, movieWatchedAPI, editMovieTitleAPI,
 } from '../../services/movies.service';
