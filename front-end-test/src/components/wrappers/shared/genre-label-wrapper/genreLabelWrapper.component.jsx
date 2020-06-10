@@ -1,6 +1,5 @@
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import Label from '../../../UI/label/label.component';
 import './genreWrapper.css';
 
@@ -19,6 +18,14 @@ const GenreLabelsWrapper = (props) => {
     }
     </div>
   );
+};
+
+GenreLabelsWrapper.propTypes = {
+  genres: PropTypes.array,
+};
+
+GenreLabelsWrapper.defaultProps = {
+  genres: [],
 };
 
 export default GenreLabelsWrapper;

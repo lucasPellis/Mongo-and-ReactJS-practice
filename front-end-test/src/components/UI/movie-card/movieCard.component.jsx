@@ -1,9 +1,5 @@
-/* eslint-disable react/no-deprecated */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prefer-stateless-function */
-/* eslint-disable react/prop-types */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './movieCard.css';
 import CheckBox from '../checkBox/checkBox.component';
 import RoundedButton from '../buttons/rounded-button/roundedButton.component';
@@ -11,7 +7,14 @@ import GenreLabelsWrapper from '../../wrappers/shared/genre-label-wrapper/genreL
 import InputWraper from '../../wrappers/shared/input-wraper/inputWraper.component';
 
 class MovieCard extends Component {
-  componentWillMount() {
+  constructor(props) {
+    super(props);
+
+    this.state = { editName: false };
+  }
+
+  emitName(id, name, callback) {
+    callback(id, name);
     this.setState({ editName: false });
   }
 
@@ -19,17 +22,20 @@ class MovieCard extends Component {
     const {
       id, title, genres, watched, deleteClick, editClick, watchedClick,
     } = this.props;
-
-    const emitName = (name) => {
-      editClick(id, name);
-      this.setState({ editName: false });
-    };
+    const { editName } = this.state;
 
     return (
       <div className="card-container">
         <div className="card-body">
           <div className="card-title">
-            { !this.state.editName ? (<h1>{title}</h1>) : (<InputWraper value={title} hideCancel nameHandler={(name) => emitName(name)} />) }
+            { !editName ? (<h1>{title}</h1>)
+              : (
+                <InputWraper
+                  value={title}
+                  hideCancel
+                  nameHandler={(name) => this.emitName(id, name, editClick)}
+                />
+              ) }
           </div>
           <div className="card-movie-genres">
             <GenreLabelsWrapper genres={genres} />
@@ -39,7 +45,7 @@ class MovieCard extends Component {
         <div className="card-footer">
           <div className="buttons-footer-containers">
             <RoundedButton type="button" text="Delete" className="btn-normal btn-red" onClick={() => deleteClick(id)} />
-            {(!this.state.editName)
+            {(!editName)
             && (<RoundedButton type="button" text="Edit name" className="btn-normal btn-blue" onClick={() => this.setState({ editName: true })} />)}
           </div>
 
@@ -51,5 +57,28 @@ class MovieCard extends Component {
     );
   }
 }
+
+MovieCard.propTypes = {
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  title: PropTypes.string,
+  genres: PropTypes.array,
+  watched: PropTypes.bool,
+  deleteClick: PropTypes.any,
+  editClick: PropTypes.any,
+  watchedClick: PropTypes.any,
+};
+
+MovieCard.defaultProps = {
+  id: '',
+  title: '',
+  genres: [],
+  watched: false,
+  deleteClick: () => { console.log('delete without callback'); },
+  editClick: () => { console.log('edit without callback'); },
+  watchedClick: () => { console.log('watched without callback'); },
+};
 
 export default MovieCard;

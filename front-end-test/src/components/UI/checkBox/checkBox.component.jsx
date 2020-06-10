@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import PropTypes from 'prop-types';
 import './checkBox.css';
 
 const CheckBox = (props) => {
@@ -21,6 +20,22 @@ const CheckBox = (props) => {
       <label htmlFor={`${id}checkbox`}>{label}</label>
     </div>
   );
+};
+
+CheckBox.propTypes = {
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  label: PropTypes.string,
+  checked: PropTypes.bool,
+  checkboxHandler: PropTypes.any.isRequired,
+};
+
+CheckBox.defaultProps = {
+  id: '',
+  label: '',
+  checked: false,
 };
 
 export default CheckBox;

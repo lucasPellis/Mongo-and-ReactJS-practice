@@ -1,7 +1,3 @@
-/* eslint-disable react/no-deprecated */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/no-this-in-sfc */
-/* eslint-disable react/prop-types */
 import React, { Component } from "react";
 import "./movieList.css";
 import { connect } from "react-redux";
@@ -22,6 +18,8 @@ class MoviesList extends Component {
   constructor(props) {
     super(props);
 
+    this.state = { filterString: "", filterGenre: '' };
+
     this.onChangeSearchBar = this.onChangeSearchBar.bind(this);
     this.watchedMovieHandler = this.watchedMovieHandler.bind(this);
     this.editMovieHandler = this.editMovieHandler.bind(this);
@@ -29,10 +27,12 @@ class MoviesList extends Component {
   }
 
   UNSAFE_componentWillMount() {
+   
+  } 
+
+  componentDidMount() {
     this.getURLParams();
   }
-
- 
 
   getURLParams() {
     const genreParam = this.props.match?.params?.genre;
@@ -57,6 +57,7 @@ class MoviesList extends Component {
 
   setGenreFilter(value) {
     this.setState({ filterGenre: value });
+    history.push( value ? "/genre=" + value : '/' );
   }
 
   render() {

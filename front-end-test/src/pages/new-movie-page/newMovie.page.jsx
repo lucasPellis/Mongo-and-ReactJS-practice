@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/no-access-state-in-setstate */
-/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 import { saveMovie } from '../../store/actions/updateMovie.action';
 import history from '../../utils/history';
@@ -15,14 +14,11 @@ class NewMoviePage extends Component {
   constructor(props) {
     super(props);
 
+    this.state = { nameStep: true, movieName: '', genres: [] };
+
     this.newNameHadler = this.newNameHadler.bind(this);
     this.newGenreHandler = this.newGenreHandler.bind(this);
     this.saveMovieHandler = this.saveMovieHandler.bind(this);
-  }
-
-  // eslint-disable-next-line react/no-deprecated
-  componentWillMount() {
-    this.setState({ nameStep: true, movieName: '', genres: [] });
   }
 
   newNameHadler(name) {
@@ -32,25 +28,30 @@ class NewMoviePage extends Component {
   }
 
   newGenreHandler(genre) {
+    const { genres } = this.state;
+
     this.setState({
-      genres: this.state.genres.concat([genre]),
+      genres: genres.concat([genre]),
     });
   }
 
   saveMovieHandler() {
+    const { movieName, genres } = this.state;
+
     const movie = {
       id: new Date().valueOf(),
-      title: this.state.movieName,
-      genres: this.state.genres,
+      title: movieName,
+      genres,
       watched: false,
       date: new Date(),
     };
 
+    // eslint-disable-next-line react/destructuring-assignment
     this.props.saveMovie(movie);
   }
 
   render() {
-    const { nameStep, movieName } = this.state;
+    const { nameStep, movieName, genres } = this.state;
     const { isLoading } = this.props;
 
     const view = nameStep ? (
@@ -58,17 +59,22 @@ class NewMoviePage extends Component {
     ) : (
       <NewMovieGenres
         movieName={movieName}
-        genres={this.state.genres}
+        genres={genres}
         newGendreHandler={this.newGenreHandler}
         saveMovieHandler={this.saveMovieHandler}
         onCancel={() => this.setState({ nameStep: true })}
       />
     );
 
-
     return isLoading ? <LoadSpinner /> : view;
   }
 }
+
+NewMoviePage.propTypes = {
+  isLoading: PropTypes.bool,
+  saveMovie: PropTypes.any,
+};
+
 
 const MapStateToProps = (state) => ({
   isLoading: state.isLoading,

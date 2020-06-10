@@ -22,5 +22,12 @@ module.exports = {
     'react',
   ],
   rules: {
+    "react/jsx-props-no-spreading": 0,
+    "no-undef": 0,
+    "react/no-array-index-key": 0,
+    "react/button-has-type": 0,
+    "react/forbid-prop-types": 0,
+    "react/require-default-props": 0,
+    "no-console": 0
   },
 };

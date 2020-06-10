@@ -1,9 +1,5 @@
-/* eslint-disable class-methods-use-this */
-/* eslint-disable react/prefer-stateless-function */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable react/prop-types */
-
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './radioButton.css';
 
 class RadioButtons extends Component {
@@ -24,9 +20,9 @@ class RadioButtons extends Component {
     const { value } = this.state;
 
     return (
-      <form className="form">
+      <form>
         {genres.map((genre, idx) => (
-          <div className="inputGroup" key={idx}>
+          <div key={idx}>
             <input
               id={genre}
               name={genre}
@@ -42,5 +38,14 @@ class RadioButtons extends Component {
     );
   }
 }
+
+RadioButtons.propTypes = {
+  genres: PropTypes.array,
+  selectedValue: PropTypes.any.isRequired,
+};
+
+RadioButtons.defaultProps = {
+  genres: [],
+};
 
 export default RadioButtons;

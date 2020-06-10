@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import './newMovieName.css';
 import InputWraper from '../../shared/input-wraper/inputWraper.component';
 
@@ -18,6 +18,16 @@ const NewMovieName = (props) => {
       />
     </div>
   );
+};
+
+NewMovieName.propTypes = {
+  movieName: PropTypes.string,
+  newNameHadler: PropTypes.any,
+  onCancel: PropTypes.any,
+};
+
+NewMovieName.defaultProps = {
+  movieName: '',
 };
 
 export default NewMovieName;

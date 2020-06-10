@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import './newMovieGenres.css';
 import GenreLabelsWrapper from '../../shared/genre-label-wrapper/genreLabelWrapper.component';
 import InputWraper from '../../shared/input-wraper/inputWraper.component';
@@ -43,6 +43,22 @@ const NewMovieGenres = (props) => {
       </div>
     </div>
   );
+};
+
+NewMovieGenres.propTypes = {
+  movieName: PropTypes.string,
+  genres: PropTypes.array,
+  newGendreHandler: PropTypes.any,
+  saveMovieHandler: PropTypes.any,
+  onCancel: PropTypes.any,
+};
+
+NewMovieGenres.defaultProps = {
+  movieName: '',
+  genres: [],
+  newGendreHandler: () => { console.log('new gendre without callback'); },
+  saveMovieHandler: () => { console.log('save movie without callback'); },
+  onCancel: () => { console.log('cancel without callback'); },
 };
 
 export default NewMovieGenres;

@@ -1,52 +1,49 @@
-/* eslint-disable react/no-deprecated */
-/* eslint-disable react/sort-comp */
 /* eslint-disable class-methods-use-this */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './inputWraper.css';
 
 import RoundedTextInput from '../../../UI/inputs/rounded-text-input/roundedTextInput.component';
 import RoundedButton from '../../../UI/buttons/rounded-button/roundedButton.component';
 
-// TODO Use redux-form.
 class InputWraper extends Component {
   constructor(props) {
     super(props);
 
+    const { value } = props;
+    this.state = { formValue: value || '' };
+
     this.onChange = this.onChange.bind(this);
     this.emitName = this.emitName.bind(this);
-  }
-
-  componentWillMount() {
-    this.setState({ formValue: this.props.value || '' });
-  }
-
-  capitalizeText(text) {
-    return text.charAt(0).toUpperCase() + text.slice(1);
-  }
-
-  formatText(formValue) {
-    return this.capitalizeText(formValue.trim().toLowerCase());
   }
 
   onChange(e) {
     this.setState({ formValue: e.target.value });
   }
 
-  emitName(event, value) {
+  capitalizeText(textToCapitalize) {
+    return textToCapitalize.charAt(0).toUpperCase() + textToCapitalize.slice(1);
+  }
+
+  formatText(formValue) {
+    return this.capitalizeText(formValue.trim().toLowerCase());
+  }
+
+  emitName(event, value, cleanValueAfterSubmit, callback) {
     event.preventDefault();
-    if (this.props.cleanValueAfterSubmit) this.setState({ formValue: '' });
-    this.props.nameHandler(this.formatText(value));
+    if (cleanValueAfterSubmit) this.setState({ formValue: '' });
+    callback(this.formatText(value));
   }
 
   render() {
-    const { placeholder, onCancel, hideCancel } = this.props;
+    const {
+      placeholder, onCancel, hideCancel, cleanValueAfterSubmit, nameHandler,
+    } = this.props;
     const { formValue } = this.state;
 
     return (
       <div className="form-wrapper">
-        <form onSubmit={(e) => this.emitName(e, formValue)}>
+        <form onSubmit={(e) => this.emitName(e, formValue, cleanValueAfterSubmit, nameHandler)}>
           <RoundedTextInput
             placeholder={placeholder}
             value={formValue}
@@ -72,5 +69,19 @@ class InputWraper extends Component {
     );
   }
 }
+
+InputWraper.propTypes = {
+  value: PropTypes.string,
+  placeholder: PropTypes.string,
+  onCancel: PropTypes.any,
+  hideCancel: PropTypes.any,
+  cleanValueAfterSubmit: PropTypes.any,
+  nameHandler: PropTypes.any,
+};
+
+InputWraper.defaultProps = {
+  value: '',
+  placeholder: '',
+};
 
 export default InputWraper;

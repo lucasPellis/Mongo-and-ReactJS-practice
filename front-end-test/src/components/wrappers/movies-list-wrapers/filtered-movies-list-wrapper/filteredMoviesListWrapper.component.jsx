@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable max-len */
 import React from 'react';
+import PropTypes from 'prop-types';
 import MoviesWrapper from '../movies-wrapper/moviesWrapper.component';
-
 
 const FilterListByTitle = (movies, titleText, genre) => {
   const filterByTitle = (movieTitle) => {
@@ -21,14 +21,13 @@ const FilterListByTitle = (movies, titleText, genre) => {
 
 
 const sortMoviesByWatchedAndChecked = (movies) => {
-  const sortedMovies = movies.sort((a) => (a.id) * (a.watched ? -1 : 1));
+  const sortedMovies = movies.sort((a) => (a.id) * (a.watched ? 1 : -1));
   return sortedMovies;
 };
 
-
 const FilteredMoviesListWrapper = (props) => {
   const {
-    movies, deleteClick, editClick, watchedClick, filterString, filterGenre,
+    movies, filterString, filterGenre, deleteClick, editClick, watchedClick,
   } = props;
 
   return (
@@ -39,6 +38,24 @@ const FilteredMoviesListWrapper = (props) => {
       deleteClick={deleteClick}
     />
   );
+};
+
+FilteredMoviesListWrapper.propTypes = {
+  movies: PropTypes.array,
+  filterString: PropTypes.string,
+  filterGenre: PropTypes.string,
+  deleteClick: PropTypes.any,
+  editClick: PropTypes.any,
+  watchedClick: PropTypes.any,
+};
+
+FilteredMoviesListWrapper.defaultProps = {
+  movies: [],
+  filterString: '',
+  filterGenre: '',
+  deleteClick: () => { console.log('delete without callback'); },
+  editClick: () => { console.log('edit without callback'); },
+  watchedClick: () => { console.log('watched without callback'); },
 };
 
 
