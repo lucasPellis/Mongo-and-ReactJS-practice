@@ -1,9 +1,12 @@
+/* eslint-disable max-len */
 import {
-  ADD_MOVIE, MOVIE_WATCHED, EDIT_MOVIE_NAME, DELETE_MOVIE,
+  ADD_MOVIE, MOVIE_WATCHED, EDIT_MOVIE_NAME, DELETE_MOVIE, GET_ALL_MOVIES,
 } from '../types/movies.types';
 
 const moviesReducer = (state = {}, { type, payload }) => {
   switch (type) {
+    case GET_ALL_MOVIES:
+      return payload;
     case ADD_MOVIE:
       return state.concat([payload]);
     case MOVIE_WATCHED:

@@ -1,5 +1,19 @@
 
+import store from '../store/index';
+
 const delayLoadingTime = 1000;
+
+
+// Simulate API fetch
+const getMovies = () => {
+  const moviesPromise = new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(store.getState().allMovies);
+    }, delayLoadingTime);
+  });
+
+  return moviesPromise;
+};
 
 
 const saveMovieAPI = (movie) => {
@@ -43,5 +57,5 @@ const editMovieTitleAPI = (movieID, newTitle) => {
 };
 
 export {
-  saveMovieAPI, deleteMovieAPI, movieWatchedAPI, editMovieTitleAPI,
+  getMovies, saveMovieAPI, deleteMovieAPI, movieWatchedAPI, editMovieTitleAPI,
 };

@@ -5,6 +5,7 @@ import {
   deleteMovie,
   movieWatched,
   editMovieTitle,
+  getAllMovies,
 } from "../../store/actions/updateMovie.action";
 import history from "../../utils/history";
 import RoundedButton from "../../components/UI/buttons/rounded-button/roundedButton.component";
@@ -26,12 +27,9 @@ class MoviesList extends Component {
     this.deleteMovieHandler = this.deleteMovieHandler.bind(this);
   }
 
-  UNSAFE_componentWillMount() {
-   
-  } 
-
   componentDidMount() {
     this.getURLParams();
+    this.props.getAllMovies();
   }
 
   getURLParams() {
@@ -109,6 +107,7 @@ const MapStateToProps = (state) => ({
 });
 
 const MapDispatchToProps = (dispatch) => ({
+  getAllMovies: () => dispatch(getAllMovies()),
   movieWatched: (movieID) => dispatch(movieWatched(movieID)),
   deleteMovie: (movieID) => dispatch(deleteMovie(movieID)),
   editMovieTitle: (movieID, newTitle) =>

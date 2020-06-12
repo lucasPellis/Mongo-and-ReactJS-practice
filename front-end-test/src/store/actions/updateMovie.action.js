@@ -1,20 +1,31 @@
 import {
-  ADD_MOVIE, MOVIE_WATCHED, EDIT_MOVIE_NAME, DELETE_MOVIE,
+  GET_ALL_MOVIES, ADD_MOVIE, MOVIE_WATCHED, EDIT_MOVIE_NAME, DELETE_MOVIE,
 } from '../types/movies.types';
 import LOADING from '../types/loading.types';
 import history from '../../utils/history';
 
 // API service.
 import {
-  saveMovieAPI, deleteMovieAPI, movieWatchedAPI, editMovieTitleAPI,
+  getMovies, saveMovieAPI, deleteMovieAPI, movieWatchedAPI, editMovieTitleAPI,
 } from '../../services/movies.service';
 
 
 const dispatchLoadingChanges = (isLoading) => ({ type: LOADING, payload: isLoading });
+
+const dispatchGetAllMovies = (movies) => ({ type: GET_ALL_MOVIES, payload: movies });
 const dispatchNewMovie = (movie) => ({ type: ADD_MOVIE, payload: movie });
 const dispatchDeleteMovie = (movieID) => ({ type: DELETE_MOVIE, payload: movieID });
 const dispatchMovieMovie = (movieID) => ({ type: MOVIE_WATCHED, payload: movieID });
 const dispatchEditMovieName = (payload) => ({ type: EDIT_MOVIE_NAME, payload });
+
+const getAllMovies = () => (dispatch) => {
+  dispatch(dispatchLoadingChanges(true));
+  getMovies()
+    .then((movies) => {
+      dispatchGetAllMovies(movies);
+      dispatch(dispatchLoadingChanges(false));
+    });
+};
 
 const saveMovie = (movie) => (dispatch) => {
   dispatch(dispatchLoadingChanges(true));
@@ -55,5 +66,5 @@ const editMovieTitle = (movieID, newTitle) => (dispatch) => {
 
 
 export {
-  saveMovie, movieWatched, editMovieTitle, deleteMovie,
+  getAllMovies, saveMovie, movieWatched, editMovieTitle, deleteMovie,
 };
