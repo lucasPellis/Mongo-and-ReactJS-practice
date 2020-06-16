@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
@@ -10,34 +10,26 @@ import NewMovieName from '../../components/wrappers/new-movie-wrappers/new-movie
 import NewMovieGenres from '../../components/wrappers/new-movie-wrappers/new-movie-genres/newMovieGenres.component';
 import LoadSpinner from '../../components/UI/load-spinner/loadSpinner.component';
 
-class NewMoviePage extends Component {
-  constructor(props) {
-    super(props);
+const NewMoviePage = (props) => {
+  const { isLoading } = props;
 
-    this.state = { nameStep: true, movieName: '', genres: [] };
+  const [nameStep, setNameStep] = useState(true);
+  const [movieName, setMovieName] = useState('');
+  const [genres, setGenres] = useState([]);
 
-    this.newNameHadler = this.newNameHadler.bind(this);
-    this.newGenreHandler = this.newGenreHandler.bind(this);
-    this.saveMovieHandler = this.saveMovieHandler.bind(this);
-  }
 
-  newNameHadler(name) {
+  const newNameHadler = (name) => {
     if (name) {
-      this.setState({ nameStep: false, movieName: name });
+      setNameStep(false);
+      setMovieName(name);
     }
-  }
+  };
 
-  newGenreHandler(genre) {
-    const { genres } = this.state;
+  const newGenreHandler = (genre) => {
+    setGenres(genres.concat([genre]));
+  };
 
-    this.setState({
-      genres: genres.concat([genre]),
-    });
-  }
-
-  saveMovieHandler() {
-    const { movieName, genres } = this.state;
-
+  const saveMovieHandler = () => {
     const movie = {
       id: new Date().valueOf(),
       title: movieName,
@@ -46,29 +38,24 @@ class NewMoviePage extends Component {
       date: new Date(),
     };
 
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.saveMovie(movie);
-  }
+    props.saveMovie(movie);
+  };
 
-  render() {
-    const { nameStep, movieName, genres } = this.state;
-    const { isLoading } = this.props;
 
-    const view = nameStep ? (
-      <NewMovieName movieName={movieName} newNameHadler={this.newNameHadler} onCancel={() => history.push('/')} />
-    ) : (
-      <NewMovieGenres
-        movieName={movieName}
-        genres={genres}
-        newGendreHandler={this.newGenreHandler}
-        saveMovieHandler={this.saveMovieHandler}
-        onCancel={() => this.setState({ nameStep: true })}
-      />
-    );
+  const view = nameStep ? (
+    <NewMovieName movieName={movieName} newNameHadler={newNameHadler} onCancel={() => history.push('/')} />
+  ) : (
+    <NewMovieGenres
+      movieName={movieName}
+      genres={genres}
+      newGendreHandler={newGenreHandler}
+      saveMovieHandler={saveMovieHandler}
+      onCancel={() => setNameStep(true)}
+    />
+  );
 
-    return isLoading ? <LoadSpinner /> : view;
-  }
-}
+  return isLoading ? <LoadSpinner /> : view;
+};
 
 NewMoviePage.propTypes = {
   isLoading: PropTypes.bool,

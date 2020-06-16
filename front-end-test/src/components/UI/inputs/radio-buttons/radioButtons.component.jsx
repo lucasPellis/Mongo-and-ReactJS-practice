@@ -1,43 +1,36 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './radioButton.css';
 
-class RadioButtons extends Component {
-  constructor(props) {
-    super(props);
+const RadioButtons = (props) => {
+  const [value, setValue] = useState('');
+  const { genres, selectedValue } = props;
 
-    this.state = { value: '' };
-  }
+  const changeHandler = (changedValue, callback) => {
+    const newValue = changedValue.toLowerCase() === 'reset' ? '' : changedValue;
+    setValue(newValue);
+    callback(newValue);
+  };
 
-  setValue(newValue, callback) {
-    const value = newValue.toLowerCase() === 'reset' ? '' : newValue;
-    this.setState({ value });
-    callback(value);
-  }
+  return (
+    <form>
+      {genres.map((genre, idx) => (
+        <div key={idx}>
+          <input
+            id={genre}
+            name={genre}
+            type="radio"
+            value={genre}
+            onChange={(e) => changeHandler(e.target.value, selectedValue)}
+            checked={genre === value}
+          />
+          <label htmlFor={genre}>{genre}</label>
+        </div>
+      )) }
+    </form>
+  );
+};
 
-  render() {
-    const { genres, selectedValue } = this.props;
-    const { value } = this.state;
-
-    return (
-      <form>
-        {genres.map((genre, idx) => (
-          <div key={idx}>
-            <input
-              id={genre}
-              name={genre}
-              type="radio"
-              value={genre}
-              onChange={(e) => this.setValue(e.target.value, selectedValue)}
-              checked={genre === value}
-            />
-            <label htmlFor={genre}>{genre}</label>
-          </div>
-        )) }
-      </form>
-    );
-  }
-}
 
 RadioButtons.propTypes = {
   genres: PropTypes.array,

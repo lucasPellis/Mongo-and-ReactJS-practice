@@ -13,7 +13,7 @@ RoundedButton.propTypes = {
   className: PropTypes.string,
   text: PropTypes.string,
   type: PropTypes.string,
-  onClick: PropTypes.any,
+  onClick: PropTypes.func,
 };
 
 RoundedButton.defaultProps = {
