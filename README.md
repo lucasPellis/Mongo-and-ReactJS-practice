@@ -1,1 +1,1 @@
-# technicalTest-ThePowerMBA
+# technicalTest
